@@ -1,7 +1,7 @@
 import Amplify, { API, graphqlOperation } from "@aws-amplify/api";
 import { async } from "fast-glob";
 import awsConfig from "./aws-exports";
-import { createGiphme, updateGiphme } from "./graphql/mutations";
+import { createGiphme, updateGiphme, deleteGiphme } from "./graphql/mutations";
 import { listGiphmes } from "./graphql/queries";
 Amplify.configure(awsConfig);
 
@@ -61,7 +61,6 @@ const getGifs = async () => {
     //set the attributes of selected gif on edit form
     img.addEventListener("click", () => {
       currentGifId = gif.id;
-      document.getElementById("edit-id").innerText = currentGifId;
       document.getElementById("edit-altText").value = gif.altText;
       document.getElementById("edit-url").value = gif.url;
       document.getElementById(
@@ -96,3 +95,14 @@ const editGif = async (e) => {
 };
 
 document.getElementById("edit-form").addEventListener("submit", editGif);
+
+const removeGif = async () => {
+  await API.graphql(
+    graphqlOperation(deleteGiphme, {
+      input: { id: currentGifId },
+    })
+  );
+  getGifs();
+};
+
+document.getElementById("delete-button").addEventListener("click", removeGif);
