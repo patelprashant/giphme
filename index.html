@@ -4,21 +4,44 @@
     <title>Document</title>
     <link rel="stylesheet" href="./css/style.css" />
   </head>
-
   <body>
     <h1>Giph-Me</h1>
-    <form id="create-form">
-      <h2>Give me New Gif</h2>
-      <label for="altText">Alt Text</label>
-      <input type="text" name="altText" id="altText" />
-      <br />
-      <br />
-      <label for="url">URL</label>
-      <input type="url" name="url" id="url" />
-      <br />
-      <br />
-      <input type="submit" value="Create" />
-    </form>
+    <div class="wrapper">
+      <div class="box">
+        <h2>Add new Gif</h2>
+        <form id="create-form">
+          <label for="altText">Alt Text</label>
+          <input type="text" name="altText" id="altText" />
+          <br />
+          <br />
+          <label for="url">URL</label>
+          <input type="url" name="url" id="url" />
+          <br />
+          <br />
+          <input type="submit" value="Create" />
+        </form>
+      </div>
+    </div>
+    <br />
+    <br />
+    <div class="wrapper">
+      <div class="box">
+        <h2 id="edit-title">Update Gif</h2>
+        <form id="edit-form">
+            <span id="edit-id"></span>
+          <label for="altText">Alt Text</label>
+          <input type="text" name="altText" id="edit-altText" />
+          <br />
+          <br />
+          <label for="url">URL</label>
+          <input type="url" name="url" id="edit-url" />
+          <br />
+          <br />
+          <input type="submit" value="Edit" />
+        </form>
+      </div>
+    </div>
+
     <br />
     <br />
     <div class="wrapper">

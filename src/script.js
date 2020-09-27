@@ -1,9 +1,11 @@
 import Amplify, { API, graphqlOperation } from "@aws-amplify/api";
+import { async } from "fast-glob";
 import awsConfig from "./aws-exports";
-import { createGiphme } from "./graphql/mutations";
+import { createGiphme, updateGiphme } from "./graphql/mutations";
 import { listGiphmes } from "./graphql/queries";
-
 Amplify.configure(awsConfig);
+
+let currentGifId = "";
 
 const createNewGif = async (e) => {
   e.preventDefault(); // don't refresh the page after form submit
@@ -28,6 +30,7 @@ const createNewGif = async (e) => {
 
     // Reset the form (make the fields blank again)
     document.getElementById("create-form").reset();
+    document.getElementById("edit-form").reset();
   } catch (err) {
     // If the request fails, print the error message to the console
     console.error(err);
@@ -53,11 +56,43 @@ const getGifs = async () => {
     img.setAttribute("src", gif.url);
     // add the alt attribute to the img
     img.setAttribute("alt", gif.altText);
-
     img.setAttribute("width", "25%");
+
+    //set the attributes of selected gif on edit form
+    img.addEventListener("click", () => {
+      currentGifId = gif.id;
+      document.getElementById("edit-id").innerText = currentGifId;
+      document.getElementById("edit-altText").value = gif.altText;
+      document.getElementById("edit-url").value = gif.url;
+      document.getElementById(
+        "edit-title"
+      ).innerText = `Update- ${gif.altText}`;
+    });
+
     // add the image to the container
     document.querySelector(".container").appendChild(img);
+    document.getElementById("edit-form").reset();
   });
 };
 
 getGifs();
+
+const editGif = async (e) => {
+  e.preventDefault();
+  try {
+    return await API.graphql(
+      graphqlOperation(updateGiphme, {
+        input: {
+          id: currentGifId,
+          altText: document.getElementById("edit-altText").value,
+          url: document.getElementById("edit-url").value,
+        },
+      })
+    );
+  } catch (err) {
+    console.error(err);
+  }
+  getGifs();
+};
+
+document.getElementById("edit-form").addEventListener("submit", editGif);
