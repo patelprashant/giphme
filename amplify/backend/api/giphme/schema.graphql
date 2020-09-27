@@ -1,0 +1,5 @@
+type Giphme @model {
+  id: ID!
+  altText: String!
+  url: String!
+}
