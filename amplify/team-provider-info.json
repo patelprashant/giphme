@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-giphme-dev-154115-authRole",
+      "UnauthRoleArn": "arn:aws:iam::812355916810:role/amplify-giphme-dev-154115-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::812355916810:role/amplify-giphme-dev-154115-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-giphme-dev-154115-deployment",
+      "UnauthRoleName": "amplify-giphme-dev-154115-unauthRole",
+      "StackName": "amplify-giphme-dev-154115",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:812355916810:stack/amplify-giphme-dev-154115/1225c3c0-0084-11eb-a1ce-02f95ca67868",
+      "AmplifyAppId": "d2ruro4zon04l"
+    }
+  }
+}
